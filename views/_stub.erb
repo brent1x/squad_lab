@@ -1,0 +1,65 @@
+  <%= erb :'partials/_header' %>
+  <p>
+    <i class="fa fa-home"></i>
+  </p>
+
+  <p>
+    <h1>
+      Headline
+    </h1>
+  </p>
+
+<p>
+
+  <p>
+
+    <table class="pure-table pure-table-horizontal">
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Field</th>
+          <th>Field</th>
+          <th>Field</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Data</td>
+          <td>Data</td>
+          <td>Data</td>
+          <td>Data</td>
+        </tr>
+        <tr>
+          <td>Data</td>
+          <td>Data</td>
+          <td>Data</td>
+          <td>Data</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </p>
+  
+  <p>
+    <form action="/authors" class="pure-form" method="POST">
+      <p>
+        <input type="text" class="pure-input" name="name" placeholder="Name of author" autofocus>
+      </p>
+      <p>
+        <input type="text" class="pure-input" name="name" placeholder="Name of author" autofocus>
+      </p>
+      <p>
+        <input type="text" class="pure-input" name="name" placeholder="Name of author" autofocus>
+      </p>
+      <p>
+        <button type="submit" class="button-large pure-button"> <i class="fa fa-paper-plane"></i>  Submit </button>
+      </p>
+    </form>
+  </p>
+  <p>
+
+    <a href="/authors/new"><button type="text" class="button-large pure-button"><i class="fa fa-spinner fa-spin"></i> Add an author </button></a>
+  
+  </p>
+  <%= erb :'partials/_footer' %>

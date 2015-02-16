@@ -1,0 +1,35 @@
+<%= erb :'partials/_header' %>
+<p>
+
+  <p>
+    <a href="/squads"> <i class="fa fa-arrow-circle-left"></i></a>
+  </p>
+
+  <p>
+    <h1>
+      Edit '<%= @squad["name"] %>'
+    </h1>
+  </p>
+
+<p>
+
+  <form action="/squads/<%= @squad["squad_id"]%>" class="pure-form" method="POST">
+    <input type="hidden" class="pure-input-1-4" name="_method" value="PUT">
+    <p>
+      <input type="text" class="pure-input-1-4" name="name" value="<%= @squad["name"] %>" autofocus>
+    </p>
+    <p>
+      <input type="text" class="pure-input-1-4" name="mascot" value="<%= @squad["mascot"] %>" autofocus>
+    </p>
+    <p>
+      <button type="submit" class="button-large pure-button"> <i class="fa fa-wrench"></i> Submit </button>
+    </p>
+  </form>
+
+  <form action="/squads/<%= @squad["squad_id"]%>" class="pure-form" method="POST">
+  <input type="hidden" class="pure-input-1-2" name="_method" value="DELETE">
+  <p><button type="submit" class="button-large pure-button" value=""><i class="fa fa-trash-o"></i>&nbsp;Delete&nbsp;</button>
+  </form></p>
+
+</p>
+<%= erb :'partials/_footer' %>

@@ -1,0 +1,61 @@
+<%= erb :'partials/_header' %>
+  <p>
+    <a href="/squads"><i class="fa fa-home"></i></a>
+  </p>
+
+  <p>
+    <h1>
+      Squads
+    </h1>
+  </p>
+
+<p>
+
+  <table class="pure-table pure-table-horizontal">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Mascot</th>
+        <th>Info</th>
+        <th>Edit</th>
+        <th>Roster</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <% @squads.each do |squad| %>
+      <tr>
+        <td>
+          <%= squad["squad_id"]%>
+        </td>        
+        <td>
+          <%= squad["name"]%>
+        </td>
+        <td>
+          <%= squad["mascot"]%>
+        </td>
+        <td class="center">
+          <a href="/squads/<%= squad["squad_id"] %>"><i class="fa fa-info-circle"></i></a>
+        </td>
+        <td class="center">
+          <a href="/squads/<%= squad["squad_id"] %>/edit"><i class="fa fa-pencil"></i></a>
+        </td>
+        <td class="center">
+          <a href="/squads/<%= squad["squad_id"] %>/students"><i class="fa fa-list-ul"></i></a>
+        </td>
+      </tr>
+      <% end %>
+
+    </tbody>
+  </table>
+
+</p>
+
+<p>
+
+  <a href="/squads/new"><button type="text" class="button-large pure-button"><i class="fa fa-plus-circle"></i> &nbsp;Add a squad&nbsp;</button></a>
+
+</p>
+<%= erb :'partials/_footer' %>
