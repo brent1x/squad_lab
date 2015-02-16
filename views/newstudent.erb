@@ -1,0 +1,32 @@
+<%= erb :'partials/_header' %>
+<p>
+
+  <p>
+    <a href="/squads"><i class="fa fa-arrow-circle-left"></i></a>
+  </p>
+
+  <p>
+    <h1>
+      Create a new student in '<%= @squad["name"]%>'
+    </h1>
+  </p>
+
+<p>
+
+  <form action="/squads/:squad_id/students" class="pure-form" method="POST">
+    <p>
+      <input type="text" class="pure-input-1-4" name="name" placeholder="Name of student" autofocus>
+    </p>
+    <p>
+      <input type="text" class="pure-input-1-4" name="position" placeholder="Position" autofocus>
+    </p>
+    <p>
+      <input type="text" class="pure-input-1-4" name="age" placeholder="Age" autofocus>
+    </p>
+    <p>
+      <button type="submit" class="button-large pure-button"> <i class="fa fa-paper-plane"></i> Submit </button>
+    </p>
+  </form>
+
+</p>
+<%= erb :'partials/_footer' %>

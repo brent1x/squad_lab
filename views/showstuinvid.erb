@@ -1,0 +1,46 @@
+<%= erb :'partials/_header' %>
+  <p>
+    <a href="/squads/<%= @squad["squad_id"]%>/students"><i class="fa fa-arrow-circle-left"></i></a>
+  </p>
+
+  <p>
+    <h1>
+      Info about '<%= @student["name"]%>'
+    </h1>
+  </p>
+
+<p>
+
+  <table class="pure-table pure-table-horizontal">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Position</th>
+        <th>Age</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr>    
+        <td>
+          <%= @student["name"]%>
+        </td>
+        <td>
+          <%= @student["position"]%>
+        </td>
+        <td>
+          <%= @student["age"]%>
+        </td>
+        <td class="center">
+          <a href="/squads/<%= @squad["squad_id"]%>/students/<%= @student["id"] %>/edit"><i class="fa fa-pencil"></i></a> 
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+</p>
+
+<%= erb :'partials/_footer' %>

@@ -51,19 +51,38 @@ get '/squads/:squad_id/edit' do
   erb :edit
 end
 
+get '/squads/:squad_id/students/new' do
+  squad_id = params[:squad_id].to_i
+  squad = @conn.exec("SELECT * FROM squads WHERE squad_id = $1", [squad_id])
+  @squad = squad[0]
+  erb :newstudent
+end
+
 get '/squads/:squad_id/students' do
+  squad_id = params[:squad_id].to_i
+  squad = @conn.exec("SELECT * FROM squads WHERE squad_id = $1", [squad_id])
+  @squad = squad[0]
+  students = []
+  @conn.exec("SELECT * FROM students WHERE squad_id = $1", [squad_id]) do |result|
+    result.each do |student|
+      students << student
+    end
+  end
+  @students = students
   erb :showstu
 end
 
-get '/squads/:squad_id/students/:student_id' do
-
+get '/squads/:squad_id/students/:id' do
+  squad_id = params[:squad_id].to_i
+  squad = @conn.exec("SELECT * FROM squads WHERE squad_id = $1", [squad_id])
+  @squad = squad[0]
+  id = params[:id].to_i
+  student = @conn.exec("SELECT * FROM students WHERE id = $1", [id])
+  @student = student[0]
+  erb :showstuinvid
 end
 
-get '/squads/:squad_id/students/new' do
-
-end
-
-get '/squads/:squad_id/students/:student_id/edit' do
+get '/squads/:squad_id/students/:id/edit' do
 
 end
 
@@ -76,8 +95,14 @@ post '/squads' do
   redirect '/squads'
 end
 
-post '/squads/:squad_id/students' do
+###############################################################################################
+######### CURRENT #############################################################################
+###############################################################################################
 
+post '/squads/:squad_id/students' do
+  squad_id = params[:squad_id].to_i
+  @conn.exec("INSERT INTO students (name, position, age, squad_id) VALUES ($1, $2, $3, $4)", [params[:name], params[:position], params[:age], squad_id])
+  redirect '/squads/' << params[:squad_id]
 end
 
 #######################
