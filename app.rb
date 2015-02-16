@@ -83,7 +83,13 @@ get '/squads/:squad_id/students/:id' do
 end
 
 get '/squads/:squad_id/students/:id/edit' do
-
+  squad_id = params[:squad_id].to_i
+  squad = @conn.exec("SELECT * FROM squads WHERE squad_id = $1", [squad_id])
+  @squad = squad[0]
+  id = params[:id].to_i
+  student = @conn.exec("SELECT * FROM students WHERE id = $1", [id])
+  @student = student[0]
+  erb :editstu
 end
 
 ########################
@@ -94,10 +100,6 @@ post '/squads' do
   @conn.exec("INSERT INTO squads (name, mascot) VALUES ($1, $2)", [params[:name], params[:mascot]])
   redirect '/squads'
 end
-
-###############################################################################################
-######### CURRENT #############################################################################
-###############################################################################################
 
 post '/squads/:squad_id/students' do
   squad_id = params[:squad_id].to_i
@@ -116,8 +118,17 @@ put '/squads/:squad_id' do
   redirect '/squads'
 end
 
-put '/squads/:squad_id/students' do
+###############################################################################################
+######### CURRENT #############################################################################
+###############################################################################################
 
+put '/squads/:squad_id/students/:id' do
+  squad_id = params[:squad_id].to_i
+  id = params[:id].to_i
+  @conn.exec("UPDATE students SET name = $1 WHERE squad_id = $2 AND id = $3", [params[:name], squad_id, id])
+  @conn.exec("UPDATE students SET position = $1 WHERE squad_id = $2 AND id = $3", [params[:position], squad_id, id])
+  @conn.exec("UPDATE students SET age = $1 WHERE squad_id = $2 AND id = $3", [params[:age], squad_id, id])
+  redirect '/squads/' << params[:squad_id] << '/students'
 end
 
 #######################
@@ -130,8 +141,11 @@ delete '/squads/:squad_id' do
   redirect '/squads'
 end
 
-delete '/squads/:squad_id/students/:student_id' do
-
+delete '/squads/:squad_id/students/:id' do
+  squad_id = params[:squad_id].to_i
+  id = params[:id].to_i
+  @conn.exec("DELETE FROM students WHERE id = $1 AND squad_id = $2", [id, squad_id])
+  redirect '/squads/' << params[:squad_id] << '/students'
 end
 
 
