@@ -118,10 +118,6 @@ put '/squads/:squad_id' do
   redirect '/squads'
 end
 
-###############################################################################################
-######### CURRENT #############################################################################
-###############################################################################################
-
 put '/squads/:squad_id/students/:id' do
   squad_id = params[:squad_id].to_i
   id = params[:id].to_i
@@ -137,6 +133,7 @@ end
 
 delete '/squads/:squad_id' do
   squad_id = params[:squad_id].to_i
+  @conn.exec('DELETE FROM students WHERE squad_id = $1', [squad_id])
   @conn.exec("DELETE FROM squads WHERE squad_id = $1", [squad_id])
   redirect '/squads'
 end
@@ -147,25 +144,3 @@ delete '/squads/:squad_id/students/:id' do
   @conn.exec("DELETE FROM students WHERE id = $1 AND squad_id = $2", [id, squad_id])
   redirect '/squads/' << params[:squad_id] << '/students'
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
